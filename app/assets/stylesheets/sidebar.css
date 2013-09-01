@@ -1,0 +1,215 @@
+.sidebar{
+  width: 240px;
+  background: #22262e;
+  color: whitesmoke;
+  font-family: 华文细黑;
+  z-index: 1;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  margin: 0;
+}
+.sidebar a{
+  text-decoration: none;
+  color: #dee1e7;
+}
+.sidebar .nav-head{
+  height: 60px;
+}
+.sidebar .nav-head .logo{
+  float: left;
+  background: url(../img/logo.png) no-repeat;
+  width: 79px;
+  height: 35px;
+  margin: 12px 0 0 15px;
+
+}
+.sidebar .nav-head ul{
+  position: absolute;
+  right: 20px;
+  top: 14px;
+  width: 104px;
+  background: rgba(0,0,0,0.2);
+  list-style: none;
+}
+.sidebar .nav-head ul li{
+  float: left;
+  margin-left: 4px;
+  text-align: center;
+  vertical-align: top;
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+}
+.sidebar .nav-head ul li.active{
+  background-color: rgba(0,0,0,0.5)!important;
+}
+.sidebar .nav-head ul li:first-child{
+  margin-left: 0;
+}
+/*.sidebar .nav-head ul li a.active{
+  background-color: rgba(0,0,0,0.5)!important;
+}*/
+.sidebar .nav-head ul li a.home{
+  padding: 8px;
+}
+.sidebar .nav-head ul li a.message span{
+  width: 8px;
+  height: 8px;
+  position: absolute;
+  top: 5px;
+  right: 43px;
+  background: #30c08b;
+  border-radius: 10px;
+  opacity: 1;
+}
+.sidebar .nav-head ul li a.user {
+
+}
+.sidebar .nav-head ul li a.user .avatar{
+  border-radius: 32px;
+  width: 18px;
+  height: 18px;
+  background: #ddd;
+  border: 1px solid #777;
+}
+
+.sidebar .nav-content{
+  position: absolute;
+  top: 60px;
+  bottom: 31px;
+  background: #1b1d24;
+  overflow: hidden;
+  left: 0;
+  right: 0;
+}
+.sidebar .nav-content form.form-search{
+  text-align: center;
+}
+.sidebar .nav-content form.form-search .input-prepend{
+  margin: 10px 0;
+  text-align: center;
+}
+.sidebar .nav-content form.form-search .add-on{
+  border: 0;
+  border-radius: 0;
+  background-color: transparent;
+}
+.sidebar .nav-content form.form-search .search-input{
+  background-color: transparent;
+  border: 0;
+  border-radius: 0;
+  width: auto;
+  color: white;
+  box-shadow: none;
+}
+.sidebar .nav-content form.form-search .search-input:focus{
+  border: 0;
+  box-shadow: none;
+  background-color: rgba(0,0,0,0.5)!important;
+}
+.sidebar .nav-content h5{
+  font-weight: 500;
+  color: #656a74;
+  text-transform: uppercase;
+  font-size: 11px;
+  margin: 10px 20px 5px;
+  letter-spacing: 0;
+}
+.sidebar .nav-content ul.menu{
+  list-style: none;
+  font-size: 16px;
+  padding: 0;
+  margin: 0 24px;
+  display: block;
+}
+.sidebar .nav-content ul.menu li{
+  margin-top: 2px;
+}
+.sidebar .nav-content ul.menu li a {
+  padding: 0 8px;
+  line-height: 25px;
+  display: block;
+}
+.sidebar .nav-content ul.menu li a span{
+  margin-left: 10px;
+}
+.sidebar .nav-content ul.menu li a.active, .sidebar .nav-content ul.follow li a.active {
+  background-color: rgba(0,0,0,0.5)!important;
+}
+.sidebar .nav-content ul.menu li a:hover, .sidebar .nav-content ul.follow li a:hover {
+  background-color: #2a2d35;
+  color: #fff;
+}
+.sidebar .nav-content h5 a{
+  margin-top: 3px;
+  float: right;
+  width: 13px;
+  text-align: center;
+  height: 13px;
+  border-radius: 10px;
+  border: 1px solid #9397A0;
+  color: #9397A0;
+  line-height: 14px;
+}
+.sidebar .nav-content h5 a:hover{
+  border: 1px solid white;
+  color: white;
+}
+.sidebar .nav-content ul.follow, .sidebar .nav-content ul.setting{
+  list-style: none;
+  margin: 0 24px;
+}
+.sidebar .nav-content ul.follow li a,.sidebar .nav-content ul.setting li a{
+  display: block;
+  padding: 3px 10px;
+  border-radius: 1px;
+  color: #dee1e7;
+  border: 0;
+  margin: 1px 0;
+  font-weight: 500;
+  font-size: 13px;
+}
+.sidebar .nav-content ul>li>a>span>i{
+  color: #777;
+  font-size: 12px;
+  margin-left: 5px;
+}
+.sidebar .nav-content ul.follow li.addnewtips{
+  position: relative;
+  padding: 5px;
+  background: #16A085;
+  margin-top: 6px;
+  margin-right: -5px;
+}
+.sidebar .nav-content ul.follow li.addnewtips .arrow{
+  display: block;
+  width: 0;
+  height: 0;
+  margin-left: -11px;
+  position: absolute;
+  top: -10px;
+  right: 4px;
+  border-color: transparent;
+  border-style: solid;
+  border-bottom-color: #16A085;
+  border-top-width: 0;
+  border-width: 5px;
+}
+.sidebar .nav-footer{
+  display: block;
+  background: #22262e;
+  height: 16px;
+  padding: 7px 5px;
+  font-size: 11px;
+  color: #eee;
+  width: 240px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+.sidebar .nav-footer a{
+  color: #aaa;
+  margin-left: 5px;
+}

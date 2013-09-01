@@ -9,3 +9,7 @@ zh:
   users: "用户管理"
   profiles: "群组管理"
   profile: "个人信息"
+  site:
+    title: "北邮模式方"
+    description: 北邮
+    keywords: 创业孵化器

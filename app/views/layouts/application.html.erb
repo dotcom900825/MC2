@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <title><%= t("site.title") %>.<%= @title if @title %></title>
+    <meta name="description" content="<%= defined?(@description) && @description.present? ? @description : t('site.description')  %>">
+    <meta name="keywords" content="<%= defined?(@keywords) && @keywords.present? ? @keywords : t('site.keywords')  %>">
+    <meta name="author" content="webmaster@<%#= SETTINGS['dayu_domain'] %>">
+    <%= render 'shared/mc2_stylesheets' %>
+    <%= csrf_meta_tags %>
+    <!--[if lte IE 8]>
+      <%= stylesheet_link_tag "style-ie" %>
+    <![endif]-->
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <%= yield :header_scripts %>
+  </head>
+  <body class="<%= @body_class %>">
+    <%#= render 'shared/loading' %>
+    <%= render 'front_page/front_page_header' %>
+
+    <%= yield :nav %>
+    <%= yield :body %>
+
+    <div class="">
+      <%= yield %>
+    </div>
+
+    <%= render 'front_page/footer' %>
+    <%#= render 'shared/add_box' %>
+    <%#= render 'shared/sitemap' %>
+
+    <%= render 'shared/mc2_javascripts' %>
+    <%= yield :footer_scripts %>
+    <%#= render 'shared/ga' %>
+  </body>
+</html>
