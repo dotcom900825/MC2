@@ -1,0 +1,74 @@
+<% if @isAuthor %>
+	<% content_for :js_block do %>
+	<script src="/js/editor/kindeditor-min.js"></script>
+	<script src="/js/editor/zh_CN.js"></script>
+	<script src="/js/feed.js"></script>
+	<% end %>
+<% end %>
+<div id="gift">
+	<div class="gift-body">
+		<a href="/" id="logo" title="MC²" class="logo">MC²</a>
+		<ul class="actions">
+			<li><%= link_back %></li>
+			<li><a href="#" class="share " title="分享"><i class="icon-share"></i></a></li>
+			<% if @isAuthor %>
+          	<li><a href="#modal" class="edit tweet-browse-tool" title="编辑动态" data-toggle="modal" data-category="feed"><i class="icon-quill"></i></a></li>
+          	<% end %>
+		</ul>
+
+		<div class="gift-view">
+			<div class="gift-media no-after">
+				<h1><%= @parent_article.title %></h1>
+				<div class="label-wrap">
+					<div class="label label-<%= @parent_article.category.name unless @parent_article.category.nil? %>"> </div>
+				</div>
+				<div class="item tweet-browse">
+					<div class="item-content">
+						<div class="tweet-title">
+							<h3>
+								<i class="icon-<%= @article.category.name unless @article.category.nil? %>"></i><%= @article.title %>
+							</h3>
+						</div>
+						<div class="tweet-body">
+							<%= @article.body.html_safe %>
+						</div>
+						<div class="tweet-info">
+							<div class="tweet-reply"><%= Feedback.find_all_by_article_id(@article.id).count %>个回答</div>
+							<div class="tweet-time"><%= @article.published_at.strftime("%m/%d/%Y") %></div>
+						</div>
+						<ul class="question-list">
+							<%= render :partial => "feedreply_list" %>
+						</ul>
+						<%= form_tag "/blog/feedbacks/new", :class => "new-comment" do %>
+						  	<input type="hidden" value="<%= @article.id %>" name="article_id"/>
+						    <textarea class="new-comment-content" name="body" placeholder="写下你的评论" autocomplete="off"></textarea>
+						    <input class="comment-submit btn btn-success" type="submit" value="发表" name="commit"/>
+						<% end %>
+					</div>
+				</div>
+			</div>
+		</div>    
+	</div>     
+</div>
+<div id="modal" class="modal hide fade" data-backdrop="static">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		<h4>十分抱歉。暂不提供修改、删除功能，若要继续执行此操作，请联系管理员QQ79172831。</h4>
+	</div>
+	<!-- <%= form_tag "/blog/articles/new",  :enctype=>"multipart/form-data" do %>
+	<div class="modal-body">
+		<%= text_field :article, :title, :class => "feedtitle", :id => "inputName", :placeholder => "标题", :datatype=>"*", :nullmsg=>"请输入标题" %>
+		<textarea id="modal-editor" name="body"></textarea>
+		<input name="article[published]" type="hidden" value="1">
+		<input name="article[allow_comments]" type="hidden" value="1">
+		<input name="article[category_id]" type="hidden" id="category_id" value="6">
+		<input name="parent_id" type="hidden" value="<%= @article.id %>">
+	</div>
+	<div class="modal-footer">
+		<a href="#" class="btn" data-dismiss="modal" aria-hidden="true">取消</a>
+		<input type="submit" value="提交" name="commit" class="btn btn-lg btn-success">
+      </div>
+	</div>
+	<% end %> -->
+	
+</div>

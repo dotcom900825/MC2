@@ -1,0 +1,37 @@
+<div class="well">
+  <fieldset>
+    <legend>发布设定</legend>
+    <div class='clearfix'>
+      <strong>发布状态:</strong>
+      <div>
+        <label for="article_published" class='checkbox'>
+          <%= check_box 'article', 'published'  %>
+          已发布
+        </label>
+      </div>
+    </div>
+    <div class='clearfix'>
+      <strong>评论开启:</strong>
+      <div>
+        <label for="article_allow_comments" class='checkbox'>
+          <%= check_box 'article', 'allow_comments'  %>
+          允许评论
+        </label>
+      </div>
+    </div>
+    <div class='clearfix'>
+      <strong>分类选择：</strong>
+      <div id='text_filter'>
+        <select name="article[category_id]" id="category_id">
+          <% Category.all.each do |cat| %>
+            <option <%= 'selected' if cat.id==@article.category_id %> value="<%= cat.id %>"><%= cat.name %></option>
+          <% end %>
+        </select>
+      </div>
+    </div>
+    <div class='form-actions'>
+      <input id="save_draft" class="btn info" type="submit" name="draft" value="保存为草稿"/>
+      <input class="btn btn-primary" type="submit" value="发布" name="commit"/>
+    </div>
+  </fieldset>
+</div>

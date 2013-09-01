@@ -1,0 +1,171 @@
+<div id="gift">
+	<div class="gift-body">
+		<a href="/" id="logo" title="MC²" class="logo">MC²</a>
+		<ul class="actions">
+			<li><a href="#" class="close" title="关闭(Esc)">&times;</a></li>
+			<li><a href="" class="share " title="分享"><i class="icon-share"></i></a></li>
+		</ul>
+		<div class="followbtn"><a href="" class="btn btn-success btn-large">+ 关注（200）</a></div>
+		<div class="gift-view">
+			<div id="gift-media" class="gift-media slide">
+				<div class="carousel-inner gift-content">
+					<div class="item article active">
+						<div class="item-content">
+							<h1><%= @article.title%></h1>
+							<div>
+								<!-- 标签写这里 -->
+								<p><%= @keywords unless @keywords.nil? %></p>
+								<p><%= @article.author %></p>
+								<p><%= @article.published_at.strftime("%m/%d/%Y") %></p>
+								<%= @article.body.html_safe %>
+							</div>
+						</div>
+					</div>
+					<div class="item tweet">
+						<ul class="item-content">
+							<li>
+								<div class="tweet-title">
+									<h4>
+										<i class="icon-question"></i><a href="">创业公司如何保护商业秘密？</a>
+									</h4>
+								</div>
+								<div class="tweet-info">
+									<a href="" class="tweet-reply">15个回答</a>
+									<div class="tweet-time">1小时前</div>
+								</div>
+							</li>
+							<li>
+								<div class="tweet-title">
+									<h4>
+										<i class="icon-info"></i><a href="">今天上线了新产品《电影超人》，iOS和android各大商店可以下载！</a>
+									</h4>
+								</div>
+								<div class="tweet-info">
+									<a href="" class="tweet-reply">15个评论</a>
+									<div class="tweet-time">1小时前</div>
+								</div>
+							</li>
+							<li>
+								<div class="tweet-title">
+									<h4>
+										<i class="icon-notification"></i><a href="">新产品快上线了，请求各大应用市场推广资源！！！</a>
+									</h4>
+								</div>
+								<div class="tweet-info">
+									<a href="" class="tweet-reply">1个回答</a>
+									<div class="tweet-time">1小时前</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<a href="" class="read-more" title="查看详细">查看详细</a>
+
+				<a class="control project" href="#gift-media" title="方案 (←)" data-slide="prev">&lsaquo;</a>
+				<a class="control feed" href="#gift-media" title="动态 (→)" data-slide="next">&rsaquo;</a>
+
+			</div>
+
+			<div class="gift-members">
+				<div class="members-content row-fluid">
+					<div class="gift-author span5">
+						<h5>团队成员</h5>
+						<ul>
+							<li>
+								<a href="/manikrathee" title="">
+									<img src="http://tp4.sinaimg.cn/1647522975/50/5665323432/1" class="avatar">
+									<div class="name">Dennis凯</div>
+								</a>
+								<div class="title">PM, CEO</div>
+							</li>
+							<li>
+								<a href="/manikrathee" title="">
+									<img src="http://tp4.sinaimg.cn/1647522975/50/5665323432/1" class="avatar">
+									<div class="name">香蕉猫</div>
+								</a>
+								<div class="title">UI设计</div>
+							</li>
+							<li>
+								<a href="/manikrathee" title="">
+									<img src="http://tp4.sinaimg.cn/1647522975/50/5665323432/1" class="avatar">
+									<div class="name">跳水的鱼</div>
+								</a>
+								<div class="title">后台技术</div>
+							</li>
+							<li>
+								<a href="/manikrathee" title="">
+									<img src="http://tp4.sinaimg.cn/1647522975/50/5665323432/1" class="avatar">
+									<div class="name">落水的狗</div>
+								</a>
+								<div class="title">前端技术</div>
+							</li>
+						</ul>
+					</div>
+					<div class="gift-sponsor span7">
+						<h5>贡献者</h5>
+						<ul>
+							<li>
+								<a href="/manikrathee" title="">
+									<img src="http://tp4.sinaimg.cn/1647522975/50/5665323432/1" class="avatar">
+									<div class="name">Dennis凯</div>
+								</a>
+							</li>
+							<li>
+								<a href="/manikrathee" title="">
+									<img src="http://tp4.sinaimg.cn/1647522975/50/5665323432/1" class="avatar">
+									<div class="name">爱吃猫</div>
+								</a>
+							</li>
+							<li>
+								<a href="/manikrathee" title="">
+									<img src="http://tp4.sinaimg.cn/1647522975/50/5665323432/1" class="avatar">
+									<div class="name">跳水的鱼</div>
+								</a>
+							</li>
+							<li>
+								<a href="/manikrathee" title="">
+									<img src="http://tp4.sinaimg.cn/1647522975/50/5665323432/1" class="avatar">
+									<div class="name">跳水的鱼</div>
+								</a>
+							</li>
+							<li>
+								<a href="/manikrathee" title="">
+									<img src="http://tp4.sinaimg.cn/1647522975/50/5665323432/1" class="avatar">
+									<div class="name">跳水的鱼</div>
+								</a>
+							</li>
+							<li>
+								<a href="/manikrathee" title="">
+									<img src="http://tp4.sinaimg.cn/1647522975/50/5665323432/1" class="avatar">
+									<div class="name">跳水的鱼</div>
+								</a>
+							</li>
+							<li>
+								<a href="/manikrathee" title="">
+									<img src="http://tp4.sinaimg.cn/1647522975/50/5665323432/1" class="avatar">
+									<div class="name">跳水的鱼</div>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+			<div class="comments">
+				<div class="comment-content">
+					<h3>评论<span>(10)</span></h3>
+					<ul class="comment-list">
+						<%= render :partial => "feedbacks_list" %>
+					</ul>
+					
+					<%= form_tag "/blog/feedbacks/new", :class => "new-comment" do %>
+					  <input style="display:none" value="<%= @article.id %>" name="article_id"/>
+					      <!-- <input id="feedback" class="input-block-level" type="text" value="你怎么看..." name="body"/> -->
+					      <textarea class="new-comment-content" name="body" placeholder="写下你的评论" autocomplete="off"></textarea>
+					      <input class="comment-submit btn btn-success" type="submit" value="发表" name="commit"/>
+					<% end %>
+				</div>
+			</div>
+		</div>    
+	</div>      
+</div>

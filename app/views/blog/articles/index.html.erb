@@ -1,0 +1,56 @@
+<% content_for :head_block do %>
+  <link href="/css/sidebar.css" rel="stylesheet">
+<% end %>
+<% content_for :js_block do %>
+	<script src="/js/index.js"></script>
+<% end %>
+<%= render 'sidebar' %>
+
+<div class="content">
+	<div class="content-header">
+		<h1><%= @search ? "搜索："+@search : "项目库" %>
+		</h1>
+		<ul>
+			<li class="filter"><%= %></li>
+			<li class="dropdown">
+				<div class="btn-group">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+						<i class="icon-filter"></i><span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+						<div class="featured">
+							<h5><i class="icon-signal"></i>阶段</h5>
+							<a href="/blog/articles/index?search%5Bcategory_id%5D=1">概念</a>
+							<a href="/blog/articles/index?search%5Bcategory_id%5D=2">研发中</a>
+							<a href="/blog/articles/index?search%5Bcategory_id%5D=3">即将推出</a>
+							<a href="/blog/articles/index?search%5Bcategory_id%5D=4">运营中</a>
+							<a href="/blog/articles/index?search%5Bcategory_id%5D=5">停止</a>
+						</div>
+						<div class="categories">
+							<h5><i class="icon-list"></i>分类</h5>
+							<a href="/blog/articles/index?tag=创业">互联网</a>
+							<a href="/blog/articles/index?tag=创业">媒体</a>
+							<a href="/blog/articles/index?tag=创业">游戏</a>
+							<a href="/blog/articles/index?tag=创业">硬件</a>
+							<a href="/blog/articles/index?tag=创业">实验室</a>
+						</div>
+						<div class="tags">
+							<h5><i class="icon-tags"></i>标签</h5>
+							<a href="/blog/articles/index?tag=创业"><span class="tag">开源</span></a>
+							<a href="/blog/articles/index?tag=创业"><span class="tag">好玩</span></a>
+							<a href="/blog/articles/index?tag=创业"><span class="tag">健康</span></a>
+						</div>
+					</ul>
+				</div>
+			</li>
+		</ul>
+	</div>
+	<div class="content-wrap">
+		<ul class="gifts">
+			<%= render 'articles_list', { :articles => @articles } %>
+			<li class="loadingmore"><i class="icon-refresh"></i>读取更多...</li>
+		</ul>
+	</div>
+</div>
+
+

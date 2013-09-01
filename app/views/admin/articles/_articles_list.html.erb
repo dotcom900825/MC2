@@ -1,0 +1,42 @@
+<% @articles.each do |article| %>
+  <tr>
+    <td class="first">
+      <a class="edit" href="/admin/articles/edit/<%= article.id %>"><%= article.title %></a>
+      <div class="action">
+        <small>
+          <small>
+            <a href="/admin/articles/child/<%= article.id %>">+子文章</a>
+          </small>
+          |
+          <small>
+            <a href="/admin/articles/edit/<%= article.id %>">修改</a>
+          </small>
+          |
+          <small>
+            <a href="/admin/articles/destroy/<%= article.id %>">删除</a>
+          </small>
+          |
+          <small>
+            <a href="/admin/feedbacks/article/<%= article.id %>">评论</a>
+          </small>
+        </small>
+      </div>
+    </td>
+    <td><%= article.category.name unless article.category.nil? %></td>
+    <td><%= article.author %></td>
+    <td>
+      <%= article.published_at.strftime("%m/%d/%Y") %>
+      <br/>
+      <% if article.published %>
+        <small class="label label-success">已发表</small>
+      <% else %>
+        <small class="label label-info">草稿</small>
+      <% end %>
+    </td>
+    <td><%= Feedback.find_all_by_article_id(article.id).count %></td>
+  </tr>
+<% end %>
+<tr>
+  <td class="paginate" colspan="5"></td>
+</tr>
+<%= will_paginate @articles, {:previous_label => "前一页", :next_label => "后一页"}  %>

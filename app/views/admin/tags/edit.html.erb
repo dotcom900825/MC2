@@ -1,0 +1,17 @@
+<div class="page-header">
+  <h2>
+    标签管理
+  </h2>
+</div>
+
+<%= form_tag :action=>"edit", :id => @tag.id do %>
+  <label for="tag_name">标签:</label>
+  <div class='input'>
+    <%= text_field 'tag', 'name', :class => 'medium' %>
+  </div>
+  <div class="form-actions">
+    <a class="btn" href="/admin/tags">取消</a>
+    或
+    <input class="btn btn-primary" type="submit" value="保存" name="commit"/>
+  </div>
+<% end %>

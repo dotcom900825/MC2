@@ -1,0 +1,24 @@
+<% content_for :head_block do %>
+	<link href="/css/bootstrap-tagmanager.css" rel="stylesheet">
+<% end %>
+<% content_for :js_block do %>
+  <script src="/js/bootstrap.autocomplete.js"></script>
+  <script src="/js/bootstrap-tagmanager.js"></script>
+  <script src="/js/editor/kindeditor-min.js"></script>
+  <script src="/js/editor/zh_CN.js"></script>
+  <script src="/js/Validform.min.js"></script>
+  <script src="/js/new.js"></script>
+<% end %>
+<div id="gift">
+	<div class="gift-body">
+		<a href="/" id="logo" title="MC²" class="logo">MC²</a>
+		<ul class="actions">
+			<li><%= link_back %></li>
+		</ul>
+		<div class="container">
+			<%= form_tag "new",  :enctype=>"multipart/form-data", :class => "form-horizontal" do %>
+			  <%= render :partial => "form" %>
+			<% end %>
+		</div>
+	</div>      
+</div>

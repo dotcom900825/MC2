@@ -1,0 +1,7 @@
+<div class="page-header">
+  <h2>文章"<%= @article.title %>"的评论</h2>
+</div>
+
+<%= form_tag :action => "edit", :id => @feedback.id do %>
+  <%= render 'form' %>
+<% end %>

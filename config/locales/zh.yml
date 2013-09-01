@@ -1,0 +1,11 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+zh:  
+  articles: "文章管理"
+  categories: "分类管理"
+  feedbacks: "评论管理"
+  tags: "标签管理"
+  users: "用户管理"
+  profiles: "群组管理"
+  profile: "个人信息"

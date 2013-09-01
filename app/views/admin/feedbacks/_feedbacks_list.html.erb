@@ -1,0 +1,47 @@
+<% @feedbacks.each do |feedback| %>
+  <tr>
+    <td class="first">
+      <div class="action">
+        作者：<%= feedback.author %>
+      </div>
+      <div class="action">
+        时间：<%= feedback.published_at.strftime("%m/%d/%Y") %>
+      </div>
+      <div class="action">
+        文章：<a href="/admin/feedbacks/article/<%= feedback.article_id %>"><%= feedback.article.title %></a>
+      </div>
+      <% if feedback.parent_id!=0 %>
+        <div class="action">
+          类型：<small class="label label-info">子评论</small>
+        </div>
+      <% end %>
+    </td>
+
+    <td>
+      <%= feedback.body.html_safe %>
+      <div class="action">
+        <small>
+          <small>
+            <a href="/admin/feedbacks/child/<%= feedback.id %>">+子评论</a>
+          </small>
+          |
+          <small>
+            <a href="/admin/feedbacks/edit/<%= feedback.id %>">修改</a>
+          </small>
+          |
+          <small>
+            <a href="/admin/feedbacks/destroy/<%= feedback.id %>">删除</a>
+          </small>
+          |
+          <small>
+            <a href="/admin/feedbacks/article/<%= feedback.article_id %>">显示对话</a>
+          </small>
+        </small>
+      </div>
+    </td>
+  </tr>
+<% end %>
+<tr>
+  <td class="paginate" colspan="5"></td>
+</tr>
+<%= will_paginate @feedbacks, {:previous_label => "前一页", :next_label => "后一页"}  %>

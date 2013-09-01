@@ -1,0 +1,70 @@
+<% if session[:user_id] %>
+<div class="sidebar">
+  <div class="nav-head">
+    <a href="/" class="logo">
+    </a>
+    <ul>
+      <li class="<% if @isHomeActive || @isMyFollowActive %>active<%end%>">
+        <a href="/" class="home <>" title="首页">
+          <i class="icon-white-home"></i>
+        </a>
+      </li>
+      <!-- <li>
+        <a href="#" class="message" title="消息列表">
+          <i class="icon-white-bullhorn"></i>
+          <span></span>
+        </a>
+      </li> -->
+      <li class="<% if @isProfileActive %>active<%end%>">
+        <a href="/blog/profile" class="user" title="<%= current_user.login %>的档案">
+          <img src="<%= current_user.picture_url %>" class="avatar">
+        </a>
+      </li>
+    </ul>
+  </div>
+  <% if @isHomeActive || @isMyFollowActive %>
+  <div id="sidebar_Home" class="nav-content">
+    <%= form_tag "index",remote:true,method:'get',class:'form-search' do%>
+    <div class="input-prepend">
+      <span class="add-on"><i class="icon-white-search"></i></span>
+      <input class="search-input" type="text" placeholder="搜索" name="search[searchstring]">
+    </div>
+    <% end %>
+
+    <h5>浏览</h5>
+    <ul class="menu"> 
+      <li class=""><a href="/" class="<% if @isHomeActive %>active<%end%>"><i class="icon-white-drawer"></i><span>项目库</span></a></li> 
+      <li class=""><a href="/blog/articles/myfollow" class="<% if @isMyFollowActive %>active<%end%>"><i class="icon-white-signup"></i><span>关注的项目</span></a></li> 
+    </ul>
+    <h5>我的项目 <a href="/blog/articles/new" title="发表新项目">+</a></h5>
+    <ul class="follow">
+      <% if @myarticles.empty? %>
+      <li class="addnewtips"><span>发表你的项目，让校友导师一起帮助你！<div class="arrow"></div></a></li>
+      <% else %>
+      <% @myarticles.each do |myarticle| %>
+      <li class=""><a href="/blog/articles/show/<%= myarticle.id %>"><span class="dot dot-<%= myarticle.category.name %>"></span><%= myarticle.title%></a></li>
+      <% end %>
+      <% end %>
+    </ul>
+  </div>
+  <% end %>
+  <% if @isProfileActive %>
+  <div id="sidebar_Profile" class="nav-content">
+    <h5>设置</h5>
+    <ul class="setting">
+      <li class=""><a href="#modal" data-toggle="modal"><span>修改资料</span></a></li>
+      <!-- <br>
+      <li class=""><a href="/" class="active"><span>验证</span></a></li>  -->
+      <li class=""><a href="/"><span>修改密码<i>暂缺</i></span></a></li>
+      <br>
+      <li class=""><a href="/sessions/logout"><span>退出</span></a></li> 
+    </ul>
+  </div>
+  <% end %>
+  <div class="nav-footer">
+    <a href="/about/">关于</a>
+    <a href="http://developers.kippt.com/" target="_blank">联系我们</a>
+    <a href="/feedback/">京ICP备13031977号</a>
+  </div>
+</div>
+<% end %>

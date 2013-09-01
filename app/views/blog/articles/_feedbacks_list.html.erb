@@ -1,0 +1,22 @@
+<% @feedbacks.each do |feedback| %>
+  <!-- <div class="row-fluid">
+    <div class="span2">
+      <img class="icon" style="width: 60px;" src="/img/face.jpg" />
+    </div>
+    <div class="span10">
+      <p class="muted"><%=feedback.user.login%></p>
+      <%= feedback.body %>
+    </div>
+  </div>
+  <hr width=100% size=2 color=#f2f4f5></hr> -->
+  <li>
+    <a href="/blog/profile/user/<%= feedback.user_id %>" title="<%= feedback.author %>">
+      <img class="avatar" src="<%= User.find(feedback.user_id).picture_url %>">
+      <div class="username"><%= feedback.user.login %></div>
+    </a>
+    <div class="date">2013.10.21</div> 
+    <div class="comment">
+      <p><%= feedback.body %></p>
+    </div>
+  </li>
+<% end %>

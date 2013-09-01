@@ -1,0 +1,225 @@
+<% content_for :js_block do %>
+	<script src="/js/bootstrap.autocomplete.js"></script>
+	<% if session[:user_id] and  session[:user_id] == @article.user_id %>
+	<script src="/js/editor/kindeditor-min.js"></script>
+	<script src="/js/editor/zh_CN.js"></script>
+	<% end %>
+	<script src="/js/show.js"></script>
+	<script src="http://static.bshare.cn/b/button.js#style=-1&amp;uuid=28495141-345a-4f82-bd47-32c579743881&amp;pophcol=2&amp;lang=zh"></script>
+    <script src="http://static.bshare.cn/b/bshareC0.js"></script>
+<% end %>
+<div id="gift">
+	<div class="gift-body">
+		<a href="/" id="logo" title="MC²" class="logo">MC²</a>
+		<ul class="actions">
+			<li><%= link_back %></li>
+			<li class="share-tool">
+				<div class="bshare-custom icon-medium-plus" style="width: 157px;margin-top: 6px;">
+					<a title="分享到微信" class="bshare-weixin"></a><a title="分享到新浪微博" class="bshare-sinaminiblog"></a>
+					<a title="分享到腾讯微博" class="bshare-qqmb"></a><a title="分享到人人网" class="bshare-renren"></a>
+				</div>
+			</li>
+			<li><a href="#" class="share " title="分享"><i class="icon-share"></i></a></li>
+			<% if session[:user_id] and  session[:user_id] == @article.user_id %>
+			<li><a href="/blog/articles/edit/<%= @article.id %>" class="edit article-tool" title="编辑"><i class="icon-quill"></i></a></li>
+          	<% end %>
+		</ul>
+		<div class="sidenav">
+          <ul>
+            <li class="follow">
+            	<% if @status == 0 %>
+				<a href="#" data-articleid="<%= @article.id %>">
+					+ 关注 <span class="label"><% if @follower.count!=0 %><%= @follower.count%><%end%></span>
+				</a>
+				<% else %>
+				<a href="#" class="followed" data-articleid="<%= @article.id %>">
+					已关注 <span class="label"><% if @follower.count!=0 %><%= @follower.count%><%end%></span>
+				</a>
+				<% end %>
+            </li>
+            <li class="active"><a href="#project" data-toggle="tab"><i class="icon-drawer"></i>方案</a></li>
+            <li><a href="#members" data-toggle="tab"><i class="icon-user"></i>成员 <span class="label"><%= @coauthors.count %>+<%= @contributors.count %></span></a></li>
+            <li><a href="#tweets" data-toggle="tab"><i class="icon-signup"></i>动态 <span class="label"><%= @feeds.count %></span></a></li>
+            <li><a href="#comments" data-toggle="tab"><i class="icon-envelop"></i>讨论 <span class="label"><%= @feedbacks.count %></span></a></li>
+          </ul>
+        </div>
+		<div class="gift-view">
+			<div class="gift-media">
+				<h1><%= @article.title%></h1>
+				<div class="label-wrap">
+					<div class="label label-<%= @article.category.name unless @article.category.nil? %>"> </div>
+				</div>
+				<section id="project" class="item project active">
+					<% if @status == 1 %>
+					<div class="item-content">
+						<h3 class="">最新动态</h3>
+						<ul class="feedlist">
+							<% @feeds.each do |feed,index| %>
+							<% return if index == 3 %>
+							<li>
+								<div class="tweet-title">
+									<h4>
+										<i class="icon-<%= feed.category.name unless feed.category.nil? %>"></i><a href="/blog/articles/feed/<%= feed.id %>"><%= feed.title %></a>
+									</h4>
+								</div>
+								<div class="tweet-info">
+									<a href="/blog/articles/feed/<%= feed.id %>" class="tweet-reply"><%= Feedback.find_all_by_article_id(feed.id).count %>个回答</a>
+									<div class="tweet-time"><%= feed.published_at.strftime("%m/%d/%Y") %></div>
+								</div>
+							</li>
+							<% end %>
+							<li class="morefeeds"><a href="#tweets" data-toggle="tab">查看更多动态</a></li>
+						</ul>
+					</div>
+					<% end %>
+					<div class="item-content">
+						<div class="intro">
+		                  <img src="<%= @article.picture_url %>">
+		                  <h4 class="excerpt"><%= @article.excerpt %></h4>
+		                  <p>
+		                  	<% if @keywords %>
+		                  	<% @keywords.each do |key| %>
+		                  	<span class="tag"><%= key %></span>
+		                  	<% end %>
+		                  	<% end %>
+		                  	<span class="updatetime">更新于<%= @article.published_at.strftime("%m/%d/%Y") %></span>
+		                  </p>
+		                </div>
+						<div  class="detail">
+							<%= @article.body.html_safe %>
+						</div>
+					</div>
+				</section>
+				<section id="tweets" class="item tweet">
+					<div class="item-content">
+						<div class="info">
+			                <h3 class="">动态</h3>
+			                <% if session[:user_id] and  session[:user_id] == @article.user_id %>
+			                <a href="#modal" class="btn btn-lg btn-success" data-toggle="modal"><i class="icon-white-signup"></i>发表新动态</a>
+			                <% end %>
+			            </div>
+						<ul class="feedlist">
+							<% @feeds.each do |feed| %>
+							<li>
+								<div class="tweet-title">
+									<h4>
+										<i class="icon-<%= feed.category.name unless feed.category.nil? %>"></i><a href="/blog/articles/feed/<%= feed.id %>"><%= feed.title %></a>
+									</h4>
+								</div>
+								<div class="tweet-info">
+									<a href="/blog/articles/feed/<%= feed.id %>" class="tweet-reply"><%= Feedback.find_all_by_article_id(feed.id).count %>个回答</a>
+									<div class="tweet-time"><%= feed.published_at.strftime("%m/%d/%Y") %></div>
+								</div>
+							</li>
+							<% end %>
+						</ul>
+					</div>
+				</section>
+				<section id="members" class="item gift-members">
+					<div class="item-content">
+						<div class="gift-author">
+						  <h5>团队成员</h5>
+						  <ul>
+						  	<% @coauthors.each do |coauthor| %>
+						    <li>
+						      <a href="/blog/profile/user/<%= coauthor.id %>">
+						        <img src="<%= coauthor.picture_url %>" class="avatar">
+						        <div class="name"><%= coauthor.name %></div>
+						      </a>
+						    </li>
+						    <% end %>
+						  </ul>
+						</div>
+						<div class="gift-sponsor">
+						  <h5>贡献者</h5>
+						  <ul>
+						  	<% @contributors.each do |contributor| %>
+						  	<% user = User.find(contributor.user_id) %>
+						    <li>
+						      <a href="/blog/profile/user/<%= user.id %>">
+						        <img src="<%= user.picture_url %>" class="avatar">
+						        <div class="name"><%= user.name %></div>
+						      </a>
+						      <a class="moreinfo" href="/blog/articles/feed/<%= contributor.feed_id %>">查看贡献</a>
+						    </li>
+						    <% end %>
+						  </ul>
+						</div>
+					</div>
+            	</section>
+            	<section id="comments" class="item comments">
+					<div class="item-content">
+					    <h3>讨论</h3>
+					    <ul class="comment-list">
+					      <%= render :partial => "feedbacks_list" %>
+					    </ul>
+					    <%= form_tag "/blog/feedbacks/new", :class => "new-comment" do %>
+						  	<input type="hidden" value="<%= @article.id %>" name="article_id"/>
+						    <textarea class="new-comment-content" name="body" placeholder="写下你的评论" autocomplete="off"></textarea>
+						    <input class="comment-submit btn btn-success" type="submit" value="发表" name="commit"/>
+						<% end %>
+					</div>
+				</section>
+			</div>
+		</div>    
+	</div>      
+</div>
+<div id="modal" class="modal hide fade" data-backdrop="static">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		<h4>发表新动态</h4>
+	</div>
+	<%= form_tag "/blog/articles/new", :enctype=>"multipart/form-data" do %>
+	<div class="modal-body">
+		<div class="newtweet-title">
+			<div class="btn-group feed-category" data-toggle="buttons-radio">
+				<button class="btn active" data-value="6">新进展</button>
+				<button class="btn" data-value="7">提问</button>
+				<button class="btn" data-value="8">添加贡献者</button>
+			</div>
+			<input autocomplete="off" id="inputName" name="article[title]" placeholder="标题" type="text">
+			<input autocomplete="off" id="inputContribute" placeholder="输入贡献者的名字" type="text">
+		</div>
+		
+		<textarea id="modal-editor" name="body"></textarea>
+		<input name="article[published]" type="hidden" value="1">
+		<input name="article[allow_comments]" type="hidden" value="1">
+		<input name="article[category_id]" type="hidden" id="category_id" value="6">
+		<input name="parent_id" type="hidden" value="<%= @article.id %>">
+		<input name="users" type="hidden">
+	</div>
+	<div class="modal-footer">
+		<div class="flash">
+          <div class="alert alert-error">
+            <span class="error"></span>
+          </div>
+        </div>
+		<a href="#" class="btn" data-dismiss="modal" aria-hidden="true">取消</a>
+		<input type="submit" value="提交" name="commit" class="btn btn-lg btn-success">
+      </div>
+	</div>
+	<% end %>
+</div>
+<a class="bshareDiv" onclick="javascript:return false;"></a>
+<footer>
+	<ul>
+		<li class="pull-left">
+			© 2013 MC², Inc.
+		</li>
+		<li class="pull-left">
+			<a href="">使用条款</a>
+		</li>
+		<li class="pull-left">
+			<a href="">隐私保护</a>
+		</li>
+		<li  class="pull-right">
+			<a href="">关于</a>
+		</li>
+		<li  class="pull-right">
+			<a href="">博客</a>
+		</li>
+		<li  class="pull-right">
+			<a href="">联系我们</a>
+		</li>
+	</ul>
+</footer>

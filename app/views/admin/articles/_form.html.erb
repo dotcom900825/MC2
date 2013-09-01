@@ -1,0 +1,22 @@
+<script src="/assets/kindeditor/kindeditor.js"></script>
+
+<div class="row-fluid">
+  <div class="span9">
+    <fieldset>
+      <label><h4>标题</h4></label>
+      <%= text_field :article, :title, :class => 'span12' %>
+      <label><h4>标签</h4></label>
+      <input id="keywords"  class="input-block-level" type="text" name="keywords" value="<%= @keywords unless @keywords.nil? %>" />
+      <label><h4>摘要</h4></label>
+      <%= text_area :article, :excerpt, :rows => 3, :class => 'span12' %>
+      <label><h4>图片</h4></label>
+      <input id="fileInput" class="input-file" type="file" name="picture" />
+      <label><h4>正文</h4></label>
+      <%= kindeditor_tag :body, @article.body, :class => 'span12'  %>
+    </fieldset>
+  </div>
+  <div class="span3">
+    <%= render 'publish_settings' %>
+  </div>
+</div>
+

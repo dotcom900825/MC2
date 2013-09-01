@@ -1,0 +1,67 @@
+<!accounts:DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>blog</title>
+    <meta http-equiv="imagetoolbar" content="no" />
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+    <link type="text/css" href="/css/bootstrap.min.css" rel="stylesheet"/>
+  </head>
+  <body>
+    <div class="navbar navbar-inverse" style="position: static;">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-target=".navbar-inverse-collapse" data-toggle="collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="#">Blog</a>
+          <div class="nav-collapse collapse navbar-inverse-collapse">
+            <ul class="nav pull-right">
+              <li class="divider-vertical"></li>
+              <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                  欢迎<%= current_user.login %>
+                  <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a href="/admin/profile">个人信息</a>
+                  </li>
+                  <li>
+                    <a href="/accounts/logout">退出 »</a>
+                  </li>                  
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row-fluid ">
+        <div class="span2">
+          <div class="well" style="padding: 8px 0pt;">
+            <ul class="nav nav-list">
+              <% current_user.profile.modules.each do |mod| %>
+                <li class="<%= controller_name.eql?(mod.split("/").last) ? "active" : "" %>"><a href="/<%= mod %>"><%= t(mod.split("/").last) %></a></li>
+                <li class="divider"></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+        <div class="span10">
+          <%= render_the_flash.html_safe unless render_the_flash.nil? %>
+          <%= yield  %>
+        </div>
+      </div>
+    </div>
+  <footer class="text-center">
+    <a href="#">Blog</a> is proudly powered by xyuanu
+  </footer>
+</body>
+</html>

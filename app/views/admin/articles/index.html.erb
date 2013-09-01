@@ -1,0 +1,46 @@
+<div class="page-header">
+  <h2>
+    文章管理
+    <div class="pull-right">
+      <a class="btn btn-info" href="/admin/articles/new">新文章</a>
+    </div>
+  </h2>
+</div>
+
+<%= form_tag "index", :class => "form-search" do %>
+    <table class="table table-striped">
+      <thead>
+        <tr class='noborder'>
+          <td colspan=5>
+            <span class="input-append">
+              <input id="search" type="text" name="search[searchstring]" class='large' />
+              <%= submit_tag("搜索", {:class => 'btn'}) %>
+            </span>
+          </td>
+        </tr>
+        <tr class="noborder">
+          <td>
+            <select name="search[published]">
+              <option value="">所有文章</option>
+              <option value="1">已发表</option>
+              <option value="0">草稿</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <th class='first'>标题</th>
+          <th>分类</th>
+          <th>作者</th>
+          <th>日期</th>
+          <th class='last'>回复</th>
+        </tr>
+      </thead>
+      <tbody id="articleList">
+        <%= render :partial => "articles_list" %>
+      </tbody>
+    </table>
+  <%end%>
+
+
+
+

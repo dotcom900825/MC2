@@ -1,0 +1,25 @@
+<div class="page-header">
+  <h2>评论管理</h2>
+</div>
+
+<%= form_tag :action=> "index" do %>
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr class='noborder'>
+        <td colspan=5>
+          <span class="input-append">
+            <input id="search" type="text" name="search" class='large' />
+            <%= submit_tag("搜索", {:class => 'btn'}) %>
+          </span>
+        </td>
+      </tr>
+      <tr>
+        <th class='first'>信息</th>
+        <th class='last'>内容</th>
+      </tr>
+    </thead>
+    <tbody id="feedbackList">
+      <%= render 'feedbacks_list', { :feedbacks => @feedbacks } %>
+    </tbody>
+  </table>
+<%end%>

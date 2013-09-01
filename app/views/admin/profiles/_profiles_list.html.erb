@@ -1,0 +1,34 @@
+<% @profiles.each do |profile| %>
+  <tr>
+    <td class="first">
+      <a class="edit" href="/admin/profiles/edit/<%= profile.id %>"><%= profile.label %></a>
+      <div class="action">
+        <small>
+          <small>
+            <a href="/admin/profiles/edit/<%= profile.id %>">修改</a>
+          </small>
+          |
+          <small>
+            <a href="/admin/profiles/destroy/<%= profile.id %>">删除</a>
+          </small>
+          |
+          <small>
+            <a href="/admin/profiles/edit/<%= profile.id %>"><%= profile.user.count %>个用户</a>
+          </small>
+        </small>
+      </div>
+    </td>
+    <td>
+      <% unless profile.modules.nil? %>
+        <% profile.modules.each do |mod| %>
+          <small class="label label-info"><%= mod.split("/").last %></small>
+        <% end %>
+      <% end %>
+
+    </td>
+  </tr>
+<% end %>
+<tr>
+  <td class="paginate" colspan="5"></td>
+</tr>
+<%= will_paginate @categories, {:previous_label => "前一页", :next_label => "后一页"}  %>

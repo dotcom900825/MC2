@@ -1,0 +1,22 @@
+<div class="row-fluid">
+  <div class="span10">
+    <fieldset>
+      <label><h4>标题</h4></label>
+      <%= text_field :category, :name, :class => 'span12' %>
+      <label><h4>关键字</h4></label>
+      <%= text_field :category, :keywords, :class => 'span12' %>
+      <label><h4>说明</h4></label>
+      <%= text_area :category, :description, :rows => 5, :class => 'span12' %>
+    </fieldset>
+
+    <div class="form-actions">
+      <a class="btn" href="/admin/categories">取消</a>
+      或
+      <input class="btn btn-primary" type="submit" value="保存" name="commit"/>
+    </div>
+  </div>
+</div>
+
+
+
+

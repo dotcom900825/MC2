@@ -1,0 +1,10 @@
+<div class="row-fluid">
+  <div class="span6 offset3">
+    <div class="page-header">
+      <h2>个人信息</h2>
+    </div>
+   	<%= form_tag "/blog/profile/index/#{@user.id}",:enctype=>"multipart/form-data" do %>
+      <%= render :partial => "form" %>
+    <% end %>
+  </div>
+</div>

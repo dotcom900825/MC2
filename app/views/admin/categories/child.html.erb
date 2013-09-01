@@ -1,0 +1,9 @@
+<div class="page-header">
+  <h2>"<%= @parent_category.name %>"的子分类</h2>
+</div>
+
+
+
+<%= form_tag :action=>"child" do %>
+  <%= render :partial => "form" %>
+<% end %>

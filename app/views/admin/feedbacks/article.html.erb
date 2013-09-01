@@ -1,0 +1,65 @@
+<div class="page-header">
+  <h2>文章"<%= @article.title %>"的评论</h2>
+</div>
+
+<table class="table table-striped table-bordered">
+  <thead>    
+    <tr>
+      <th class='first'>信息</th>
+      <th class='last'>内容</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @feedbacks.each_with_index do |feedback,m| %>
+      <tr>
+        <td class="first">
+          <div class="action">
+            作者：<%= feedback.author %>
+          </div>
+          <div class="action">
+            时间：<%= feedback.published_at.strftime("%m/%d/%Y") %>
+          </div>
+          <% if feedback.parent_id!=0 %>
+            <div class="action">
+              类型：<small class="label label-info">子评论</small>
+            </div>
+          <% end %>
+        </td>
+        <td>
+          <%= feedback.body.html_safe %>
+          <div class="action">
+            <small>
+              <small>
+                <a href="/admin/feedbacks/child/<%= feedback.id %>">+子评论</a>
+              </small>
+              |
+              <small>
+                <a href="/admin/feedbacks/edit/<%= feedback.id %>">修改</a>
+              </small>
+              |
+              <small>
+                <a href="/admin/feedbacks/destroy/<%= feedback.id %>">删除</a>
+              </small>
+            </small>
+            <p class="text-right">
+              <small>第<%= m+1 %>楼</small>
+            </p>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+    <tr>
+      <td class="paginate" colspan="5"></td>
+    </tr>
+    <%= will_paginate @feedbacks, {:previous_label => "前一页", :next_label => "后一页"}  %>
+  </tbody>
+</table>
+
+
+
+<fieldset class="form-horizontal">
+  <legend>添加一个评论</legend>
+  <%= form_tag :action => "new" do %>
+    <%= render 'form' %>
+  <% end %>
+</fieldset>

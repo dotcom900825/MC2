@@ -1,0 +1,46 @@
+<fieldset class='form-horizontal'>
+  <legend>帐号设置</legend>
+  <div class='control-group'>
+    <label class='control-label' for="user_login">用户名</label>
+    <div class='controls'>
+      <%= text_field('user', 'login', {:class => 'span5'}) %>
+    </div>
+  </div>
+  <div class='control-group'>
+    <label class='control-label' for="user_password">密码</label>
+    <div class='controls'>
+      <%= password_field('user', 'password', {:class => 'span5'}) %>
+    </div>
+  </div>
+  <div class='control-group'>
+    <label class='control-label' for="user_email">邮箱</label>
+    <div class='controls'>
+      <%= text_field('user', 'email', {:class => 'span5'})  %>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="user_profile">用户组</label>
+    <div class="controls">
+      <select id="user_profile_id" name="user[profile_id]">
+        <% Profile.all.each do |profile| %>
+          <option <%= 'selected' if @user.profile_id == profile.id %> value="<%= profile.id %>"><%= profile.label%></option>
+        <% end %>
+      </select>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="user_state">用户状态</label>
+    <div class="controls">
+      <select name="user[state]">
+        <option <%= 'selected' if @user.state == 'active' %> value="active">活跃</option>
+        <option <%= 'selected' if @user.state == 'inactive' %> value="inactive">不活跃</option>
+      </select>
+    </div>
+  </div>
+</fieldset>
+
+<div class="form-actions">
+  <a class="btn" href="/admin/users">取消</a>
+  或
+  <input class="btn btn-primary" type="submit" value="保存" name="commit"/>
+</div>

@@ -1,0 +1,18 @@
+<script src="/assets/kindeditor/kindeditor.js"></script>
+
+<%= hidden_field_tag 'feedback[article_id]', @article.id %>
+
+<div class="row-fluid">
+  <div class="span10">
+    <fieldset>      
+      <label><h4>评论内容</h4></label>
+      <%= kindeditor_tag :body, @feedback.body, :class => 'span12'  %>
+    </fieldset>
+
+    <div class="form-actions">
+      <a class="btn" href="/admin/feedbacks">取消</a>
+      或
+      <input class="btn btn-primary" type="submit" value="保存" name="commit"/>
+    </div>
+  </div>
+</div>

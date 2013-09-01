@@ -1,0 +1,140 @@
+<h2>
+  <%= action_name == "new" ? "发表新项目" : "编辑项目"%>
+</h2>
+<fieldset>
+  <div class="control-group">
+    <label class="control-label" for="inputName">项目名称<em>*</em></label>
+    <div class="controls">
+      <%= text_field :article, :title, :class => "projectname", :id => "inputName", :placeholder => "不超过25字", :datatype=>"*",:nullmsg=>"请输入项目名称" %>
+      <span class="help-block">一个响亮的名字能让你的项目更吸引人</span>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="selectStage">目前阶段<em>*</em></label>
+    <div class="controls" >
+      <select name="article[category_id]" id="category_id">
+        <option <%= 'selected' if 1==@article.category_id || !@article.category_id  %> value="1">创意</option>
+        <option <%= 'selected' if 2==@article.category_id %> value="2">研发中</option>
+        <option <%= 'selected' if 3==@article.category_id %> value="3">即将推出</option>
+        <option <%= 'selected' if 4==@article.category_id %> value="4">已停止</option>
+        <option <%= 'selected' if 5==@article.category_id %> value="5">运营中</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="inputPic">封面图片<em>*</em></label>
+    <div class="controls">
+      <input type="file" id="inputPic" accept="image/*" name="picture" datatype="*" nullmsg="请选择一张封面图片">
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="inputExcerpt">一句话简介</label>
+    <div class="controls">
+      <%= text_area :article, :excerpt, :rows => 3, :id => "inputExcerpt" %>
+      <span class="help-block"><140字。假如发微博，你会怎么介绍你的项目？</span>
+    </div>
+  </div>
+
+  <div class="gift-preview">
+    <div class="gift-poster">
+      <img src="<%= @article.picture_url if @article %>">
+    </div>
+    <div class="gift-detail">
+      <div class="title">
+        <%= @article ? @article.title : "项目名称" %>
+      </div>
+      <div class="labels">
+        <div class="label label-<%= @article.category if @article %>"> </div>
+        <span class="follower">+<%= ArticleUser.find( :all,:conditions=>['article_id=?',@article.id]).length unless @article.nil? %>关注</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="projectdetail">详细描述<em>*</em></label>
+    <div class="controls">
+
+      <textarea id="projectdetail" name="body">
+        <% if @article.body %>
+        <%= @article.body.html_safe %>
+        <% else %>
+        <p>以下是一些建议内容：</p>
+        <h3>详细说明</h3>
+        <p>分享下你的项目特征、你即将要做的事情。更多的图片会使项目看起来真实、生动。</p> 
+        <h3>风险与挑战</h3>
+        <p>完成这个项目，你们将面临的困难和挑战有哪些？你准备怎么克服它们？</p>
+        <h3>计划</h3>
+        <p>给你的项目设定一些里程碑，和达到这个里程碑的时间点。</p>
+        <h3>关于你们</h3>
+        <p>一个项目的成功除了项目足够好，还需要它的主人很优秀。告诉大家为什么你能够做好这个项目，自信地。</p>
+        <% end %>
+      </textarea>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label">我和我的小伙伴</label>
+    <div class="controls">
+      <ul class="members">
+        <% if @coauthors 
+          @coauthors.each do |coauthor|
+        %>
+        <li id="<%= coauthor.id %>">
+          <img src="<%= coauthor.picture_url %>" class="avatar">
+          <div class="name">
+            <span><%= coauthor.name %></span>
+            <% if coauthor.id != current_user.id %><a href="#" class="remove" data-remove="<%= coauthor.id %>">×</a><% end %>
+          </div>
+        </li>
+          <% end %>
+        <% else %>
+        <li id="<%= current_user.id %>">
+          <img src="<%= current_user.picture_url %>" class="avatar">
+          <div class="name">
+            <span><%= current_user.name %></span>
+            <!-- <input type="text" placeholder="职务或分工" class="job"> -->
+          </div>
+        </li>
+        <% end %>
+        <li class="newmember">
+          <label class="avatar" for="searchname"></label>
+          <div class="name">
+            <input type="text" placeholder="搜索小伙伴的名字" id="searchname" class="typeahead" autocomplete="off">
+          </div>
+        </ul>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label" for="tags">标签</label>
+      <div class="controls">
+        <input id="tags" name="tags" type="text" placeholder="按Tab键生成新标签" autocomplete="off">
+        <input name="keywords" type="hidden" value="<%= @keywords if @keywords %>">
+        <div class="tags-suggestion">
+          推荐标签
+          <a class="tm-tag">
+            创业
+          </a>
+          <a class="tm-tag">
+            软硬
+          </a>
+          <a class="tm-tag">
+            移动互联网
+          </a>
+        </div>
+        <span class="help-block">标签越精准，越容易让领域专业人士看到你的问题；最多只能输入5个标签</span>
+      </div>
+    </div>
+  </fieldset>
+  <fieldset>
+    <div class="control-group">
+      <div class="controls">
+        <input name="users" type="hidden" value="<%=current_user.id%>">
+        <input name="article[allow_comments]" type="hidden" value="1">
+        <input name="article[published]" type="hidden" value="0">
+        <input type="submit" value="提交" name="commit" class="btn btn-lg btn-success">
+      </div>
+    </div>
+  </fieldset>

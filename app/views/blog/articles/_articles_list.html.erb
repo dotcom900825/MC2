@@ -1,0 +1,17 @@
+<% @articles.each do |article| %>
+  <li id="<%= article.id %>" class="gift">
+    <a class="gift-poster" href="/blog/articles/show/<%= article.id %>">
+      <img src="<%= article.picture_url %>">
+    </a>
+    <div class="gift-detail">
+      <div class="title">
+        <%= article.title %>
+      </div>
+      <div class="labels">
+        <div class="label <%= "label-" + article.category.name unless article.category.nil? %>"> </div>
+        <span class="follower">+<%= ArticleUser.find( :all,:conditions=>['article_id=?',article.id]).length %>关注</span>
+      </div>
+    </div>
+  </li>
+<% end %>
+

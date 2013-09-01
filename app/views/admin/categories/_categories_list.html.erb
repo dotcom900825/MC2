@@ -1,0 +1,33 @@
+<% @categories.each do |category| %>
+  <tr>
+    <td class="first">
+      <a class="edit" href="/admin/categories/edit/<%= category.id %>"><%= category.name %></a>
+      <div class="action">
+        <small>
+          <small>
+            <a href="/admin/categories/child/<%= category.id %>">+子分类</a>
+          </small>
+          |
+          <small>
+            <a href="/admin/categories/edit/<%= category.id %>">修改</a>
+          </small>
+          |
+          <small>
+            <a href="/admin/categories/destroy/<%= category.id %>">删除</a>
+          </small>
+          |
+          <small>
+            <a href="/admin/categories/edit/<%= category.id %>"><%= category.article.count %>篇文章</a>
+          </small>
+        </small>
+      </div>
+    </td>
+    <td><%= category.keywords %></td>
+    <td><%= category.description %></td>
+    <td><%= Category.find(category.parent_id).name if category.parent_id!=0%></td>
+  </tr>
+<% end %>
+<tr>
+  <td class="paginate" colspan="5"></td>
+</tr>
+<%= will_paginate @categories, {:previous_label => "前一页", :next_label => "后一页"}  %>

@@ -1,0 +1,38 @@
+<% @feedreply.each do |feedreply| %>
+<% author =  User.find(feedreply.user_id) %>
+<li id="<%= feedreply.id %>" class="question">
+  <div class="answerer">
+    <img src="<%= author.picture_url %>" class="avatar">
+    <div class="name"><%= feedreply.author %></div>
+    <div class="profile"><%= author.education %> <%= "/" if author.position %><%= author.position %></div>
+  </div>
+  <div class="answer">
+    <%= feedreply.body.html_safe %>
+  </div>
+  <!-- <div class="like">
+    <a href="#" title="赞同" data-toggle="tooltip" data-placement="right"><i class="icon-thumbs-up"></i></a>
+    <div class="like-list">12票，来自马力，尹兴良，吴敏，纪阳，吴振宇，廖秋虎...等人</div>
+  </div> -->
+  <!-- <div class="comments">
+    <a href="" class="comment-number" title="评论"><i class="icon-comment"></i>??</a>
+    <div class="comment-wrap hide">
+      <ul class="comment-list">
+        <li>
+          <a  href="/dennisbear" title="dennisbear">
+            <img class="avatar" src="https://d19weqihs4yh5u.cloudfront.net/avatars/a297bbb8-4efb-48bd-a487-19411cee0448/160x160">
+            <div class="username">dennisbear</div>
+          </a>
+          <div class="date">2013.10.21</div> 
+          <div class="comment">
+            <p>这个项目屌爆了！！！</p>
+          </div>
+        </li>
+      </ul>
+      <form class="new-comment">
+        <textarea class="new-comment-content" name="comment" placeholder="写下你的评论" autocomplete="off"></textarea>
+        <input type="submit" value="发表" class="comment-submit btn btn-success" title="Enter">
+      </form>
+    </div>
+  </div> -->
+</li>
+<% end %>

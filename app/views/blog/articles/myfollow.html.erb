@@ -1,0 +1,52 @@
+<% content_for :head_block do %>
+    <link href="/css/sidebar.css" rel="stylesheet">
+<% end %>
+
+<%= render 'sidebar' %>
+
+<div class="content">
+  <div class="content-header">
+    <h1>关注的项目</h1>
+    <ul>
+      <li>研发中</li>
+      <li class="dropdown">
+        <div class="btn-group">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            <i class="icon-filter"></i><span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <div class="featured">
+              <h5><i class="icon-signal"></i>阶段</h5>
+              <a href="http://google.com">概念</a>
+              <a href="http://google.com">研发中</a>
+              <a href="http://google.com">即将推出</a>
+              <a href="http://google.com">销售/运营中</a>
+              <a href="http://google.com">停止</a>
+            </div>
+            <div class="categories">
+              <h5><i class="icon-list"></i>分类</h5>
+              <a href="http://google.com">互联网</a>
+              <a href="http://google.com">媒体</a>
+              <a href="http://google.com">游戏</a>
+              <a href="http://google.com">硬件</a>
+              <a href="http://google.com">实验室</a>
+            </div>
+            <div class="tags">
+              <h5><i class="icon-tags"></i>标签</h5>
+              <a href="http://google.com">开源</a>
+              <a href="http://google.com">好玩</a>
+              <a href="http://google.com">健康</a>
+            </div>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="content-wrap">
+    <ul class="gifts">
+      <%= render 'articles_list', { :articles => @articles } %>
+    </ul>
+  </div>
+</div>
+
+

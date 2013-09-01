@@ -1,0 +1,38 @@
+<div class="page-header">
+  <h2>
+    标签管理
+  </h2>
+</div>
+
+
+<table class="table table-stripe">
+  <thead>
+    <tr class='noborder'>
+      <th>标签</th>
+      <th>文章数</th>
+    </tr>
+  </thead>
+  <% @tags.each do |tag| %>
+    <tr>
+      <td class="first">
+        <a class="edit" href="/admin/tags/edit/<%= tag.id %>"><%= tag.name %></a>
+        <div class="action">
+          <small>
+            <small>
+              <a href="/admin/tags/edit/<%= tag.id %>">修改</a>
+            </small>
+            |
+            <small>
+              <a href="/admin/tags/destroy/<%= tag.id %>">删除</a>
+            </small>
+          </small>
+        </div>
+      </td>
+      <td><%= tag.article.count %></td>
+    </tr>
+  <% end %>
+  <tr>
+    <td class="paginate" colspan="5"></td>
+  </tr>
+  <%= will_paginate @tags, {:previous_label => "前一页", :next_label => "后一页"}  %>
+</table>

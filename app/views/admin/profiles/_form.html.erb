@@ -1,0 +1,26 @@
+<div class="row-fluid">
+  <div class="span4">
+    <fieldset>
+      <label><h4>名称</h4></label>
+      <%= text_field :profile, :label, :class => 'span12' %>
+      <label><h4>权限</h4></label>
+      <% ["admin/articles", "admin/categories", "admin/feedbacks", "admin/tags", "admin/users", "admin/profiles"].each_with_index do |access,m| %>
+        <label class="checkbox" for="modules_<%= m %>">
+          <input <%= 'checked' if @profile.modules.include?(access) if @profile.modules %> id="modules_<%= m %>" type="checkbox" value="<%= access %>" name="modules[]"/>
+          <%= access %>
+        </label>
+      <% end %>
+      <input type="hidden" checked="checked" type="checkbox" value="admin/profile" name="modules[]"/>
+    </fieldset>
+
+    <div class="form-actions">
+      <a class="btn" href="/admin/profiles">取消</a>
+      或
+      <input class="btn btn-primary" type="submit" value="保存" name="commit"/>
+    </div>
+  </div>
+</div>
+
+
+
+

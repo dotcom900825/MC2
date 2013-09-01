@@ -1,0 +1,47 @@
+
+<div class="page-header">
+  <h2>
+    用户管理
+    <div class="pull-right">
+      <a class="btn btn-info" href="/admin/users/new">添加用户</a>
+    </div>
+  </h2>
+</div>
+
+
+
+<div class="row-fluid">
+  <div class="span12">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th><h4>用户名</h4></th>
+          <th><h4>名字</h4></th>
+          <th><h4>邮箱</h4></th>
+          <th><h4>用户组</h4></th>
+          <th><h4>文章数</h4></th>
+          <th><h4>评论数</h4></th>
+          <th><h4>状态</h4></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <td><a class="edit" href="/admin/users/edit/<%= user.id %>"><%= user.login %></a></td>
+            <td><%= user.name %></td>
+            <td><%= user.email %></td>
+            <td><%= user.profile.label %></td>
+            <td><%= user.article.count %></td>
+            <td><%= user.feedback.count %></td>
+            <td><%= user.state %></td>
+          </tr>
+        <% end %>
+        <tr>
+          <td class="paginate" colspan="10"></td>
+        </tr>
+        <%= will_paginate @users, {:previous_label => "前一页", :next_label => "后一页"}  %>
+      </tbody>
+    </table>
+  </div>
+</div>
+

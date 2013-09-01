@@ -1,0 +1,151 @@
+<% content_for :head_block do %>
+  <link href="/css/sidebar.css" rel="stylesheet">
+<% end %>
+<% content_for :js_block do %>
+	<script src="/js/profile.js"></script>
+<% end %>
+<%= render '/blog/articles/sidebar' %>
+
+<div class="content" data-spy="scroll" data-target=".profile-nav">
+	<div class="profile-header">
+		<ul class="contact">
+			<% if !@user2.renren.blank? %>
+			<li><a title="人人" href="<%= @user2.renren %>" target="_blank"><i class="social-renren light"></i></a></li>
+			<% end %>
+
+			<% if !@user2.tecentweibo.blank? %>
+			<li>
+				<a title="腾讯微博" href="<%= @user2.tecentweibo %>" target="_blank">
+					<i class="social-tt light"></i>
+				</a>
+			</li>
+			<% end %>
+
+			<% if !@user2.sinaweibo.blank? %>
+			<li>
+				<a title="新浪微博" href="<%= @user2.sinaweibo %>" target="_blank">
+					<i class="social-sinat light"></i>
+				</a>
+			</li>
+			<% end %>
+
+			<% if !@user2.qq.blank? %>
+			<li><a href="#"><i class="social-qq light"></i></a><span><%= @user2.qq %></span></li>
+			<% end %>
+			<% if !@user2.tel.blank? %>
+			<li><a href="#"><i class="icon-phone light"></i></a><span><%= @user2.tel %></span></li>
+			<% end %>
+			<% if !@user2.email.blank? %>
+			<li><a href="#"><i class="icon-envelop light"></i></a><span><%= @user2.email %></span></li>
+			<% end %>
+		</ul>
+		<div class="details">
+			<img src="http://tp1.sinaimg.cn/1702812624/50/5655983032/1" class="avatar">
+			<h3>
+				<%= @user2.name %>
+			</h3>
+			<div class="detail-item">
+				<p class="education">
+					<% if @user.education %>
+						<%= @user.education %>
+					<% else %>
+						请完善教育信息
+					<% end %></p>
+				<!-- <a class="edit"><i class="icon-quill"></i></a>
+				<input class="edit-input" type="text" placeholder="入学 + 学历"> -->
+			</div>
+			<div class="detail-item">
+				<p class="occupation">
+					<% if @user.position %>
+						<%= @user.position %>
+					<% else %>
+						请完善工作信息
+					<% end %>
+				</p>
+				<!-- <a class="edit"><i class="icon-quill"></i></a>
+				<input class="edit-input" type="text" placeholder="公司 + 职位"> -->
+			</div>
+		</div>
+	</div>
+	<div class="profile-nav">
+		<ul class="nav subnav">
+			<li class="active"><a href="#myproject" class="">提出的项目<span><%= @user2articles.count%></span></a></li>
+			<li><a href="#mycontribution" class="">贡献<span><%= @contributes.count %></span></a></li>
+			<li><a href="#myfocus" class="">关注的项目<span><%= @follows.count%></span></a></li>
+			<!-- <li><a href="#myfeed" class="">动态</a></li> -->
+		</ul>
+	</div>
+	<div class="profile-content">
+		<section id="myproject">
+			<h3>提出的项目</h3>
+			<ul class="project-list">
+				<% if @user2articles.empty? %>
+					<li>暂时没有项目</li>
+				<% else %>
+					<% @user2articles.each do |article| %>
+					<li>
+						<a href="/blog/articles/show/<%= article.id %>" class="project">
+							<img src="<%= article.picture_url %>">
+							<p><%= article.title%></p>
+						</a>
+						<div class="labels">
+							<div class="label label-<%= article.category.name %>"> </div>
+							<span class="follower">+100关注</span>
+						</div>
+					</li>
+					<% end %>
+				<% end %>
+			</ul>
+		</section>
+		<section id="mycontribution">
+			<h3>贡献</h3>
+			<ul class="project-list">
+				<% if @contributes.empty? %>
+					<li>暂时没有贡献</li>
+				<% else %>
+					<% @contributes.each do |contribute| %>
+					<li>
+						对 <a href="/blog/articles/show/<%= contribute.article_id %>"><%= Article.find(contribute.article_id).title %></a> 作出 <a href="/blog/articles/feed/<%= contribute.feed_id %>">贡献#<%= contribute.feed_id %></a>
+						<!-- <div class="tweet-info">
+							<a href="" class="tweet-like">15赞同</a>
+						</div> -->
+					</li>
+					<% end %>
+				<!-- <li>回答 <a href="">纠错神器Lernstift：出现拼写错误就振动!</a> 的 <a href=""><i class="icon-question-sign"></i>怎么样保护创意？</a>
+					<div class="tweet-info">
+						<a href="" class="tweet-like">15赞同</a>
+					</div>
+				</li> -->
+				<% end %>
+			</ul>
+		</section>
+		<section id="myfocus">
+			<h3>关注的项目</h3>
+			<ul class="project-list">
+				<% if @follows.empty? %>
+					<li>暂时没有关注</li>
+				<% else %>
+					<% @follows.each do |follow| %>
+					<li>
+						<a href="/blog/articles/show/<%= follow.article.id %>" class="project">
+							<img src="<%= follow.article.picture_url %>">
+							<p><%= follow.article.title%></p>
+						</a>
+						<div class="labels">
+							<div class="label label-<%= follow.article.category.name %>"> </div>
+							<span class="follower">+<%= ArticleUser.find( :all,:conditions=>['article_id=?',follow.article.id]).length %>关注</span>
+						</div>
+					</li>
+					<% end %>
+				<% end %>
+			</ul>
+		</section>
+		<!-- <section id="myfeed">
+			<h3>动态</h3>
+			<ul class="project-list">
+				<li>回答 <a href="">Breather智能门锁：做租房领域的Zipcar</a> 的 <a href=""><i class="icon-question-sign"></i>怎么样保护创意？</a></li>
+				<li>提出了项目 <a href="">Breather智能门锁：做租房领域的Zipcar</a></li>
+			</ul>
+		</section> -->
+	</div>
+</div>

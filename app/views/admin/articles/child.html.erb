@@ -1,0 +1,8 @@
+<div class="page-header">
+  <h2>"<%= @parent_article.title %>"的子文章</h2>
+</div>
+
+<%= form_tag "/admin/articles/child/#{@parent_article.id}",  :enctype=>"multipart/form-data" do %>
+  <%= render :partial => "form" %>
+<% end %>
+

@@ -1,0 +1,8 @@
+<div class="page-header">
+  <h2>修改文章</h2>
+</div>
+
+
+<%= form_tag "/admin/articles/edit/#{@article.id}", :enctype=>"multipart/form-data" do %>
+  <%= render :partial => "form" %>
+<% end %>
